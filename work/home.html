@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Photo Gallery and Challenges</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .thumbnails {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .thumbnails img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            cursor: pointer;
+        }
+        .full-size {
+            margin-top: 20px;
+            width: 100%;
+            text-align: center;
+        }
+        .full-size img {
+            max-width: 100%;
+            height: auto;
+        }
+        .image-info {
+            text-align: center;
+            margin-top: 10px;
+        }
+        @media (max-width: 600px) {
+            .thumbnails img {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <div class="thumbnails">
+            <!-- Thumbnails will be dynamically added here -->
+        </div>
+        <div class="full-size">
+            <img id="full-size-image" src="" alt="Full Size Image">
+        </div>
+        <div class="image-info" id="image-info">
+            <!-- Image information will be dynamically added here -->
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const images = [
+                { src: 'image1.jpg', location: 'New York' },
+                { src: 'image2.jpg', location: 'Paris' },
+                { src: 'image3.jpg', location: 'Tokyo' },
+                // Add your image paths and locations here
+            ];
+
+            const thumbnailsContainer = document.querySelector('.images');
+            const fullSizeImage = document.getElementById('full-size-image');
+            const imageInfo = document.getElementById('image-info');
+
+            images.forEach((image, index) => {
+                const img = document.createElement('img');
+                img.src = image.src;
+                img.alt = `Thumbnail ${index + 1}`;
+                img.addEventListener('click', () => {
+                    fullSizeImage.src = image.src;
+                    imageInfo.textContent = `Image Path: ${image.src}, Location: ${image.location}`;
+                });
+                img.onerror = () => {
+                    img.style.display = 'none';
+                    console.error(`Image not found: ${image.src}`);
+                };
+                thumbnailsContainer.appendChild(img);
+            });
+
+            // Set the first image as the default full-size image
+            if (images.length > 0) {
+                fullSizeImage.src = images[0].src;
+                imageInfo.textContent = `Image Path: ${images[0].src}, Location: ${images[0].location}`;
+            }
+        });
+
+        function hasContiguousSubarrayWithSum(arr, target) {
+            let currentSum = 0;
+            const sumMap = new Map();
+
+            for (const num of arr) {
+                currentSum += num;
+
+                if (currentSum === target) {
+                    return true;
+                }
+
+                if (sumMap.has(currentSum - target)) {
+                    return true;
+                }
+
+                sumMap.set(currentSum, true);
+            }
+
+            return false;
+        }
+
+        // Example usage
+        const arr = [4, 2, 7, 1, 9, 5];
+        const target = 17;
+        console.log(hasContiguousSubarrayWithSum(arr, target)); // Output: true
+
+        function transformString(s) {
+            const length = s.length;
+
+            if (length % 15 === 0) {
+                // Perform both operations: reverse first, then replace with ASCII codes
+                const reversedString = s.split('').reverse().join('');
+                return reversedString.split('').map(char => char.charCodeAt(0)).join(' ');
+            } else if (length % 3 === 0) {
+                // Reverse the entire string
+                return s.split('').reverse().join('');
+            } else if (length % 5 === 0) {
+                // Replace each character with its ASCII code
+                return s.split('').map(char => char.charCodeAt(0)).join(' ');
+            } else {
+                return s;
+            }
+        }
+
+        // Example usages
+        console.log(transformString("Hamburger"));  // Output: "regrubmaH"
+        console.log(transformString("Pizza"));      // Output: "80 105 122 122 97"
+        console.log(transformString("Chocolate Chip Cookie"));  // Output: "eikooCpihCetalocohC"
+    </script>
+</body>
+</html>

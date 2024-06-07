@@ -1,0 +1,29 @@
+# Interactive Photo Gallery and Coding Challenges
+
+## Project Setup
+
+1. Clone the repository:
+    ```bash
+    git clone <your-repo-url>
+    ```
+
+2. Navigate to the project directory:
+    ```bash
+    cd <your-repo-name>
+    ```
+
+3. Open `index.html` in your preferred web browser to view the interactive photo gallery.
+
+## Coding Challenges
+
+### Array Manipulation
+
+The solution to the array manipulation challenge is in `challenges/arrayMap.js`.
+
+### String Transformation
+
+The solution to the string transformation challenge is in `challenges/stringTransform.js`.
+
+## Contact
+
+If you have any questions or need further clarification, please reach out to us at clet@codeofafrica.com.
